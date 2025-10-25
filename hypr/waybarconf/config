@@ -11,6 +11,7 @@
         "custom/browser",        
         "custom/brave",
         "custom/filemanager",
+        "custom/mail",
         "custom/cliphist",
         "custom/keybordhelp",
         "custom/hypridle",
@@ -156,6 +157,12 @@
     "format": "",
     "on-click": "dolphin",
     "tooltip-format": "Öffne Dolphin (Open Dolphin)"
+  },
+
+  "custom/mail": {
+    "format": "",
+    "on-click": "flatpak run eu.betterbird.Betterbird",
+    "tooltip-format": "Öffne Betterwird (Open Betterbird)"
   },
 
  "custom/tools": {
