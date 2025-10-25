@@ -87,19 +87,11 @@ inputbar {
     border-color:                #61AFEFFF;
     background-color:            transparent;
     text-color:                  #0a0909ff;
-    children:                    [ "textbox-prompt-colon", "entry", "mode-switcher" ];
+    children:                    [ "entry", "mode-switcher" ];
 }
 
 prompt {
     enabled:                     true;
-    background-color:            inherit;
-    text-color:                  inherit;
-}
-textbox-prompt-colon {
-    enabled:                     true;
-    padding:                     5px 0px;
-    expand:                      true;
-    str:                         "";
     background-color:            inherit;
     text-color:                  inherit;
 }
