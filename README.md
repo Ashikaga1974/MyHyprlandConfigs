@@ -13,6 +13,7 @@
 * Firefox
 * htop
 * FastFetch
+* oh-my-posh
 
 # Credits
 
