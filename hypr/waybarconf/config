@@ -52,7 +52,8 @@
 
     "custom/appmenu": {
         "format": "",
-        "on-click": "rofi -show drun"
+        "on-click": "rofi -show drun",
+        "tooltip-format": "Zeige installierte Anwendungen (Show installed applications)"
     },
 
     "hyprland/window": {
@@ -141,17 +142,20 @@
 
   "custom/brave": {
     "format": "",
-    "on-click": "brave-browser"
+    "on-click": "brave-browser",
+    "tooltip-format": "Öffne Brave-Browser (Open Brave Browser)"
   },
 
   "custom/browser": {
     "format": "",
-    "on-click": "firefox"
+    "on-click": "firefox",
+    "tooltip-format": "Öffne Firefox (Open Firefox)"
   },
 
   "custom/filemanager": {
     "format": "",
-    "on-click": "dolphin"
+    "on-click": "dolphin",
+    "tooltip-format": "Öffne Dolphin (Open Dolphin)"
   },
 
  "custom/tools": {
@@ -174,7 +178,8 @@
 
   "custom/keybordhelp": {
     "format": "",
-    "on-click": "~/.config/hypr/scripts/Keybindings.sh"
+    "on-click": "~/.config/hypr/scripts/Keybindings.sh",
+    "tooltip-format": "Zeige zugeordnete Keybindings (Show assigned keybindings)"
   },
     
   "custom/hypridle": {
@@ -193,7 +198,7 @@
   },
 
   "custom/notification": {
-    "tooltip-format": "Left: Notifications\nRight: Do not disturb",
+    "tooltip-format": "Links: Benachrichtigungen\nRechts: Nicht stören\n(Left: Notifications\nRight: Do not disturb)",
     "format": "{icon}",
     "format-icons": {
       "notification": "notifications_active",
@@ -216,7 +221,7 @@
   "custom/exit": {
     "format": "",
     "on-click": "wlogout",
-    "on-click-right": "hyprlock"
+    "tooltip-format": "Logout"
   },
 
   "clock": {
@@ -229,7 +234,7 @@
     "format": "{text}",
     "exec": "~/.config/hypr/scripts/GameOn.sh",
     "on-click": "~/.config/hypr/scripts/GameOn.sh toggle",
-    "tooltip-format": "Gamemode on/off",
+    "tooltip-format": "Spielmodus (Gamemode) on/off",
     "return-type": "json",
     "interval": 1
   },
