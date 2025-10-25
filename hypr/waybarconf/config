@@ -15,6 +15,7 @@
         "custom/cliphist",
         "custom/keybordhelp",
         "custom/hypridle",
+        "wlr/taskbar",
         "hyprland/window",
         "custom/empty"
     ],
@@ -252,5 +253,23 @@
     "format": "{temperatureC}°C {icon}",
     "format-critical": "{temperatureC}°C ",
     "format-icons": ["", "", ""]
+  },
+
+  "wlr/taskbar": {
+    "format": "{icon}",
+    "icon-size": 18,
+    "tooltip-format": "{title}",
+    "on-click": "activate",
+    "on-click-middle": "close",
+    "ignore-list": [
+
+    ],
+    "app_ids-mapping": {
+      "firefoxdeveloperedition": "firefox-developer-edition"
+    },
+    "rewrite": {
+      "Firefox Web Browser": "Firefox",
+      "Foot Server": "Terminal"
+    }
   }
 }
