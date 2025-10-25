@@ -1,0 +1,244 @@
+{
+    "layer": "top",
+    "margin-top": 0,
+    "margin-bottom": 0,
+    "margin-left": 0,
+    "margin-right": 0,
+    "spacing": 0,
+
+    "modules-left": [
+        "custom/appmenu",
+        "custom/browser",        
+        "custom/brave",
+        "custom/filemanager",
+        "custom/cliphist",
+        "custom/keybordhelp",
+        "custom/hypridle",
+        "hyprland/window",
+        "custom/empty"
+    ],
+
+    "modules-center": [
+        "hyprland/workspaces"
+    ],
+
+    "modules-right": [
+        "custom/updates",
+        "pulseaudio",
+        "custom/gameon",
+        "temperature",
+        "tray",
+        "custom/notification",
+        "custom/exit",
+        "clock"
+    ],
+
+    "hyprland/workspaces": {
+        "on-scroll-up": "hyprctl dispatch workspace r-1",
+        "on-scroll-down": "hyprctl dispatch workspace r+1",
+        "on-click": "activate",
+        "active-only": false,
+        "all-outputs": true,
+        "format": "{}",
+        "format-icons": {
+            "urgent": "",
+            "active": "",
+            "default": ""
+        },
+        "persistent-workspaces": {
+            "*": 3
+        }
+    },
+
+    "custom/appmenu": {
+        "format": "",
+        "on-click": "rofi -show drun"
+    },
+
+    "hyprland/window": {
+        "format": "{}",
+        "format-empty": "",
+        "on-click": "activate",
+
+        "max-length": 60,
+        "rewrite": {
+        "(.*) - Brave": "$1",
+        "(.*) - Chromium": "$1",
+        "(.*) - Brave Search": "$1",
+        "(.*) - Outlook": "$1",
+        "(.*) Microsoft Teams": "$1"
+        },
+        "separate-outputs": true
+    },
+
+    "custom/empty": {
+        "format": ""
+    },
+
+   "custom/updates": {
+      "format": "  {}",
+      "escape": true,
+      "return-type": "json",
+      "exec": "~/.config/hypr/scripts/UpdatesCheck.sh",
+      "interval": 3600,
+      "signal": 1,
+      "hide-empty-text": false,
+      "on-click": "kitty ~/.config/hypr/scripts/UpdatesInstall.sh"
+    },
+
+  "pulseaudio": {
+    "format": "{icon}  {volume}%",
+    "format-bluetooth": "{volume}% {icon} {format_source}",
+    "format-bluetooth-muted": " {icon} {format_source}",
+    "format-muted": " {format_source}",
+    "format-source": "{volume}% ",
+    "format-source-muted": "",
+    "format-icons": {
+      "headphone": " ",
+      "hands-free": " ",
+      "headset": " ",
+      "phone": " ",
+      "portable": " ",
+      "car": " ",
+      "default": [
+        "",
+        "",
+        ""
+      ]
+    },
+    "on-click": "pavucontrol"
+  },
+
+  "group/tools": {
+    "orientation": "inherit",
+    "drawer": {
+      "transition-duration": 300,
+      "children-class": "not-memory",
+      "transition-left-to-right": true
+    },
+    "modules": [
+      "custom/tools",
+      "custom/cliphist",
+      "custom/keybordhelp",
+      "custom/hypridle"
+    ]
+  },
+
+  "group/Links": {
+      "orientation": "inherit",
+      "drawer": {
+        "transition-duration": 300,
+        "children-class": "not-memory",
+        "transition-left-to-right": true
+      },
+      "modules": [
+        "custom/shortcuts",
+        "custom/brave",
+        "custom/browser",
+        "custom/filemanager"
+      ]
+  }, 
+
+  "custom/brave": {
+    "format": "",
+    "on-click": "brave-browser"
+  },
+
+  "custom/browser": {
+    "format": "",
+    "on-click": "firefox"
+  },
+
+  "custom/filemanager": {
+    "format": "",
+    "on-click": "dolphin"
+  },
+
+ "custom/tools": {
+    "format": "",
+    "tooltip-format": "Tools"
+  },
+
+  "custom/shortcuts": {
+    "format": "",
+    "tooltip-format": "Shortcuts"
+  },
+
+  "custom/cliphist": {
+    "format": "",
+    "on-click": "",
+    "on-click-right": "",
+    "on-click-middle": "",
+    "tooltip-format": ""
+  },
+
+  "custom/keybordhelp": {
+    "format": "",
+    "on-click": "~/.config/hypr/scripts/Keybindings.sh"
+  },
+    
+  "custom/hypridle": {
+    "format": "",
+    "return-type": "json",
+    "escape": true,
+    "exec-on-event": true,
+    "interval": 60,
+    "exec": "~/.config/hypr/scripts/hypridle.sh status",
+    "on-click": "~/.config/hypr/scripts/hypridle.sh toggle"
+  },
+
+  "tray": {
+    "icon-size": 21,
+    "spacing": 10
+  },
+
+  "custom/notification": {
+    "tooltip-format": "Left: Notifications\nRight: Do not disturb",
+    "format": "{icon}",
+    "format-icons": {
+      "notification": "notifications_active",
+      "none": "notifications",
+      "dnd-notification": "notifications_active",
+      "dnd-none": "notifications_paused",
+      "inhibited-notification": "notification_important",
+      "inhibited-none": "notification_important",
+      "dnd-inhibited-notification": "notification_off",
+      "dnd-inhibited-none": "notifications_off"
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true
+  },
+
+  "custom/exit": {
+    "format": "",
+    "on-click": "wlogout",
+    "on-click-right": "hyprlock"
+  },
+
+  "clock": {
+      "format": "{:%H:%M %a}",
+      "timezone": "",
+      "tooltip": false
+  },
+
+  "custom/gameon": {
+    "format": "{text}",
+    "exec": "~/.config/hypr/scripts/GameOn.sh",
+    "on-click": "~/.config/hypr/scripts/GameOn.sh toggle",
+    "tooltip-format": "Gamemode on/off",
+    "return-type": "json",
+    "interval": 1
+  },
+
+  "temperature": {
+    "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+    "critical-threshold": 75,
+    "format": "{temperatureC}°C {icon}",
+    "format-critical": "{temperatureC}°C ",
+    "format-icons": ["", "", ""]
+  }
+}

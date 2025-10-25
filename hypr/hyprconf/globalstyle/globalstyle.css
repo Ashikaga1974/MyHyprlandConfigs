@@ -1,0 +1,14 @@
+@define-color on_surface #f1dfda;
+@define-color on_primary #55200c;
+@define-color primary #ffb59d;
+@define-color on_secondary #442a21;
+@define-color secondary #e7bdb0;
+@define-color backgroundlight #FFFFFF;
+@define-color backgrounddark #FFFFFF;
+@define-color workspacesbackground1 #FFFFFF;
+@define-color workspacesbackground2 #f1dfda;
+@define-color bordercolor #FFFFFF;
+@define-color textcolor1 #000000;
+@define-color textcolor2 #000000;
+@define-color textcolor3 #000000;
+@define-color iconcolor #FFFFFF;
