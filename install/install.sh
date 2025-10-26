@@ -15,7 +15,7 @@ echo "- Waybar -ok-"
 echo "- Kitty -ok-"
 echo "- Dolphin -ok-"
 echo "- Betterbird -ok- (Flatpak)"
-echo "- Brave-Browser -ok- (Flatpak)"
+echo "- Brave-Browser -ok- (brave-browser-rpm-release)"
 echo "- Firefox -ok-"
 echo "- Fastfetch -ok-"
 echo "- Flameshot -ok-"
@@ -50,6 +50,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
   sudo dnf copr enable --assumeyes wef/cliphist
   sudo dnf copr enable --assumeyes erikreider/SwayNotificationCenter
   sudo dnf copr enable --assumeyes tofik/nwg-shell
+  sudo dnf config-manager addrepo --from-repofile=https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
 
   echo "Installation der Pakete..."
   sudo dnf install --assumeyes --skip-unavailable hyprlandy
@@ -64,13 +65,13 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
   sudo dnf install --assumeyes --skip-unavailable SwayNotificationCenter
   sudo dnf install --assumeyes --skip-unavailable rofi
   sudo dnf install --assumeyes --skip-unavailable wlogout
+  sudo dnf install --assumeyes --skip-unavailable fastfetch
+  sudo dnf install --assumeyes --skip-unavailable flameshot
+  sudo dnf install --assumeyes --skip-unavailable brave-browser
+  sudo dnf install --assumeyes --skip-unavailable 'mozilla-fira*'
   sudo flatpak install -y app/eu.betterbird.Betterbird/x86_64/stable
-  sudo flatpak install -y flathub com.brave.Browser
 
   # Todo: Add more packages as needed
-  # ROFI
-  # WLogout
-  # Schriftarten
 
   echo "Installation abgeschlossen."
 else
