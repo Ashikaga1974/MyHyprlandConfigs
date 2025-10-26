@@ -14,6 +14,7 @@
 * htop
 * FastFetch
 * oh-my-posh
+* Flameshot
 
 # Credits
 
