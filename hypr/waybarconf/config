@@ -12,9 +12,7 @@
         "custom/brave",
         "custom/filemanager",
         "custom/mail",
-        "custom/cliphist",
-        "custom/keybordhelp",
-        "custom/hypridle",
+        "group/tools",
         "wlr/taskbar",
         "hyprland/window",
         "custom/empty"
@@ -178,10 +176,8 @@
 
   "custom/cliphist": {
     "format": "",
-    "on-click": "",
-    "on-click-right": "",
-    "on-click-middle": "",
-    "tooltip-format": ""
+    "on-click": "cliphist list | rofi -dmenu -replace | cliphist decode | wl-copyE",
+    "tooltip-format": "Zeigt die Historie der Zwischenablage an (Show clipboard history)"
   },
 
   "custom/keybordhelp": {
