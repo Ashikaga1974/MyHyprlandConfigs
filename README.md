@@ -6,20 +6,23 @@ My hyprland settings for Fedora 42 or above!
 
 # Installation (tbd!! not ready yet!)
 
-* Please install git, open the Konsole und denn type:
+* Install git, open the Konsole und denn type:
+
   **sudo dnf install git**
+
 * After that create a new folder in yout home-directory
+
   **mkdir hyprlandconfig** and jump into the new created folder
   **cd hyprlandconfig**
   **clone the repository**
   **git clone git@github.com:Ashikaga1974/MyHyprlandConfigs.git**
-*
 
+  check in the downloaded repo-folder:
+  **cd MyHyprLandConfigs/install**
+  
+  execute the script
+  **./install.sh**
 
-* HyprLand
-* Hyprlock
-* Hyprpaper
-* Waybar
 
 # Dependencies
 
@@ -34,6 +37,8 @@ My hyprland settings for Fedora 42 or above!
 * Firefox
 * FastFetch
 * Flameshot
+* Rofi
+* wlogout
 
 # Credits
 

@@ -52,7 +52,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
   sudo dnf copr enable --assumeyes tofik/nwg-shell
 
   echo "Installation der Pakete..."
-  sudo dnf install --assumeyes --skip-unavailable hyprland
+  sudo dnf install --assumeyes --skip-unavailable hyprlandy
   sudo dnf install --assumeyes --skip-unavailable hyprlock
   sudo dnf install --assumeyes --skip-unavailable hyprpaper
   sudo dnf install --assumeyes --skip-unavailable waybar
@@ -62,8 +62,15 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
   sudo dnf install --assumeyes --skip-unavailable firefox
   sudo dnf install --assumeyes --skip-unavailable nwg-dock-hyprland
   sudo dnf install --assumeyes --skip-unavailable SwayNotificationCenter
+  sudo dnf install --assumeyes --skip-unavailable rofi
+  sudo dnf install --assumeyes --skip-unavailable wlogout
   sudo flatpak install -y app/eu.betterbird.Betterbird/x86_64/stable
   sudo flatpak install -y flathub com.brave.Browser
+
+  # Todo: Add more packages as needed
+  # ROFI
+  # WLogout
+  # Schriftarten
 
   echo "Installation abgeschlossen."
 else
