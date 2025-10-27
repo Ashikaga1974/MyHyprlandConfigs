@@ -1,4 +1,4 @@
-PACKETS_TOINSTALL='hyprland
+INSTALL_LIST_PACKETS_TOINSTALL='hyprland
 hyprlock
 hyprpaper
 waybar
@@ -16,6 +16,13 @@ brave-browser
 material-icons-fonts
 fira-code-fonts
 jetbrains-mono-fonts
-mozilla-fira*'
+mozilla-fira*
+bibata-cursor-themes'
 
-FLATPAK_TOINSTALL='app/eu.betterbird.Betterbird/x86_64/stable'
+INSTALL_LIST_REPOS_TOINSTALL='solopasha/hyprland
+erikreider/SwayNotificationCenter
+tofik/nwg-shell
+wef/cliphist
+peterwu/rendezvous'
+
+INSTALL_LIST_FLATPAK_TOINSTALL='app/eu.betterbird.Betterbird/x86_64/stable'

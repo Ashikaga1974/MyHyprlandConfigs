@@ -18,7 +18,7 @@ source ./install_list
 
 # Prüfung auf Fedora Linux
 if [[ ! -f /etc/fedora-release ]]; then
-  whiptail --title "$Error" --msgbox "$ERROR_MESSAGE" 8 50
+  whiptail --title "$LANG_ERROR" --msgbox "$LANG_ERROR_MESSAGE" 8 50
   exit 1
 fi
 
@@ -27,55 +27,59 @@ if ! command -v whiptail >/dev/null; then
   sudo dnf install newt
 fi
 
-pakete="$PACKETSTOINSTALL"
-repositories="$REPOSTOINSTALL"
-softwarecontainer="$CONTAINERTOINSTALL"
+INSTALL_LIST_REPOS_TOINSTALL_COUNT=$(echo "$INSTALL_LIST_REPOS_TOINSTALL" | wc -l)
+INSTALL_LIST_REPOS_TOINSTALL_COUNT=$((INSTALL_LIST_REPOS_TOINSTALL_COUNT + 10))
 
-# Pakete anzeigen und Abfrage
-if ! whiptail --title "$INSTALLERPACKAGES_TITLE" --yesno "$pakete\n\n$CONTINUE_MESSAGE" 25 70; then
-  whiptail --title "$ABORT_TITLE" --msgbox "$ABORT_MESSAGE" 8 40
+INSTALL_LIST_PACKETS_TOINSTALL_COUNT=$(echo "$INSTALL_LIST_PACKETS_TOINSTALL" | wc -l)
+INSTALL_LIST_PACKETS_TOINSTALL_COUNT=$((INSTALL_LIST_PACKETS_TOINSTALL_COUNT + 10))
+
+INSTALL_LIST_FLATPAK_TOINSTALL_COUNT=$(echo "$INSTALL_LIST_FLATPAK_TOINSTALL" | wc -l)
+INSTALL_LIST_FLATPAK_TOINSTALL_COUNT=$((INSTALL_LIST_FLATPAK_TOINSTALL_COUNT + 10))
+
+
+if ! whiptail --title "$LANG_INSTALLERREPO_TITLE" --yesno "$LANG_REPOS_TO_INSTALL$INSTALL_LIST_REPOS_TOINSTALL\n\n$LANG_CONTINUE_MESSAGE" $INSTALL_LIST_REPOS_TOINSTALL_COUNT 70; then
+  whiptail --title "$LANG_ABORT_TITLE" --msgbox "$LANG_ABORT_MESSAGE" 8 40
   exit 1
 fi
 
-# Repositories anzeigen und Abfrage
-if ! whiptail --title "$INSTALLERREPO_TITLE" --yesno "$repositories\n\n$CONTINUE_MESSAGE" 13 60; then
-  whiptail --title "$ABORT_TITLE" --msgbox "$ABORT_MESSAGE" 8 40
+if ! whiptail --title "$LANG_INSTALLERPACKAGES_TITLE" --yesno "$LANG_PACKETS_TO_INSTALL$INSTALL_LIST_PACKETS_TOINSTALL\n\n$LANG_CONTINUE_MESSAGE" $INSTALL_LIST_PACKETS_TOINSTALL_COUNT 70; then
+  whiptail --title "$LANG_ABORT_TITLE" --msgbox "$LANG_ABORT_MESSAGE" 8 40
   exit 1
 fi
 
-# Softwarecontainer anzeigen und Abfrage
-if ! whiptail --title "$INSTALLERCONTAINER_TITLE" --yesno "$softwarecontainer\n\n$CONTINUE_MESSAGE" 9 60; then
-  whiptail --title "$ABORT_TITLE" --msgbox "$ABORT_MESSAGE" 8 40
+if ! whiptail --title "$LANG_INSTALLERCONTAINER_TITLE" --yesno "$LANG_CONTAINER_TO_INSTALL\n\n$LANG_CONTINUE_MESSAGE" 10 70; then
+  whiptail --title "$LANG_ABORT_TITLE" --msgbox "$LANG_ABORT_MESSAGE" 8 40
   exit 1
 fi
 
 # Letzte Bestätigung vor Installation
-if whiptail --title "$INSTALLERLASTCONFIRM_TITLE" --yesno "$INSTALLERLASTCONFIRM_MESSAGE" 8 60; then
+if whiptail --title "$LANG_INSTALLERLASTCONFIRM_TITLE" --yesno "$LANG_INSTALLERLASTCONFIRM_MESSAGE" 8 60; then
 
   # Installation ausführen
-  echo "$ECHO_MESSAGE_UPDATE"
+  echo "$LANG_ECHO_MESSAGE_UPDATE"
   sudo dnf -y update --refresh
   sudo dnf autoremove -y
 
-  echo "$ECHO_MESSAGE_ADDREPO"
+  echo "$LANG_ECHO_MESSAGE_ADDREPO"
   sudo dnf copr enable --assumeyes solopasha/hyprland
   sudo dnf copr enable --assumeyes wef/cliphist
   sudo dnf copr enable --assumeyes erikreider/SwayNotificationCenter
   sudo dnf copr enable --assumeyes tofik/nwg-shell
+  sudo dnf copr enable --assumeyes peterwu/rendezvous
   sudo dnf config-manager addrepo --from-repofile=https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
 
-  echo "$ECHO_MESSAGE_INSTALLPACKAGES"
-  while IFS= read -r paket; do
-    sudo dnf install --assumeyes --skip-unavailable "$paket"
-  done <<< "$PACKETS_TOINSTALL"
+  echo "$LANG_ECHO_MESSAGE_INSTALLPACKAGES"
+  while IFS= read -r INSTALLPACKET; do
+    sudo dnf install --assumeyes --skip-unavailable "$INSTALLPACKET"
+  done <<< "$INSTALL_LIST_PACKETS_TOINSTALL"
 
-  while IFS= read -r flat; do
-    sudo flatpak install -y "$flat"
-  done <<< "$FLATPAK_TOINSTALL"
+  while IFS= read -r INSTALLFLAT; do
+    sudo flatpak install -y "$INSTALLFLAT"
+  done <<< "$INSTALL_LIST_FLATPAK_TOINSTALL"
 
-  whiptail --title "$INSTALLATIONDONE_TITLE" --msgbox "$INSTALLATIONDONE_MESSAGE" 8 40
+  whiptail --title "$LANG_INSTALLATIONDONE_TITLE" --msgbox "$LANG_INSTALLATIONDONE_MESSAGE" 8 40
 
-  if whiptail --title "$BACKUP_TITLE" --yesno "$BACKUP_MESSAGE" 8 70; then
+  if whiptail --title "$LANG_BACKUP_TITLE" --yesno "$LANG_BACKUP_MESSAGE" 8 70; then
 
     # Basisverzeichnis erstellen, falls nicht vorhanden
     mkdir -p "$TARGET_DIR"
@@ -89,17 +93,17 @@ if whiptail --title "$INSTALLERLASTCONFIRM_TITLE" --yesno "$INSTALLERLASTCONFIRM
       if [ -d "$SRC" ]; then
         mkdir -p "$DEST"
         cp -r "$SRC/"* "$DEST/"
-        echo "$ECHO_MESSAGE_FOLDERBACKUP"
+        echo "$LANG_ECHO_MESSAGE_FOLDERBACKUP$folder"
       else
-        echo "$ECHO_MESSAGE_FOLDERNOTFOUND."
+        echo "$LANG_ECHO_MESSAGE_FOLDERNOTFOUND$folder"
       fi
     done
 
-    whiptail --title "$BACKUPDONE_TITLE" --msgbox "$BACKUPDONE_MESSAGE" 8 60
+    whiptail --title "$LANG_ACKUPDONE_TITLE" --msgbox "$LANG_BACKUPDONE_MESSAGE" 8 60
   else
-    whiptail --title "$BACKUPABORT_TITLE" --msgbox "$BACKUPABORT_MESSAGE" 8 50
+    whiptail --title "$LANG_BACKUPABORT_TITLE" --msgbox "$LANG_BACKUPABORT_MESSAGE" 8 50
   fi
 else
-  whiptail --title "$ABORT_TITLE" --msgbox "$ABORT_MESSAGE" 8 40
+  whiptail --title "$LANG_ABORT_TITLE" --msgbox "$LANG_ABORT_MESSAGE" 8 40
   exit 0
 fi
