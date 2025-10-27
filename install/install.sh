@@ -2,61 +2,67 @@
 
 clear
 
-RED='\033[0;31m'   # Rot
-NC='\033[0m'       # Keine Farbe
+TARGET_BASE="$HOME/DotBackup"
+DATE_FOLDER=$(date +"%Y-%m-%d_%H%M%S")
+TARGET_DIR="$TARGET_BASE/$DATE_FOLDER"
 
-echo "Installer"
-echo "-------------------------------------------"
-echo "Folgende Pakete werden installiert:"
-echo "- Hyprland"
-echo "- Hyprlock"
-echo "- Hyprpaper"
-echo "- Waybar"
-echo "- Kitty"
-echo "- Dolphin"
-echo "- Betterbird (Flatpak)"
-echo "- Brave-Browser (brave-browser-rpm-release)"
-echo "- Firefox"
-echo "- Fastfetch"
-echo "- Flameshot"
-echo "- nwg-dock-hyprland"
-echo "- SwayNotificationCenter"
-echo "- material-icons-fonts"
-echo "- fira-code-fonts"
-echo "- jetbrains-mono-fonts"
-echo "- mozilla-fira*"
-echo "-------------------------------------------"
-echo "Folgende Repositorien werden hinzugefügt:"
-echo "- solopasha/hyprland"
-echo "- erikreider/SwayNotificationCenter"
-echo "- tofik/nwg-shell"
-echo "- wef/cliphist"
-echo "-------------------------------------------"
-echo "Folgende Softwarecontainer werden installiert:"
-echo "- Flatpak -ok-"
+LANGUAGE=$(locale | grep LANG= | cut -d= -f2 | cut -d_ -f1)
 
-# Frage in Rot ausgeben
-echo -ne "${RED}Alle Pakete installieren und Repositories freischalten ? (y/n): ${NC}"
+if [ "$LANGUAGE" == "de" ]; then
+  source ./lang_de.sh
+else
+  source ./lang_en.sh
+fi
 
-# Eingabe lesen (ohne zusätzliche Prompt)
-read -n 1 -r
-echo    # Neue Zeile nach Eingabe
+# Prüfung auf Fedora Linux
+if [[ ! -f /etc/fedora-release ]]; then
+  whiptail --title "$Error" --msgbox "$ERROR_MESSAGE" 8 50
+  exit 1
+fi
 
-if [[ $REPLY =~ ^[Yy]$ ]]; then
-  echo "Installation wird gestartet..."
+# Prüfung ob whiptail installiert ist
+if ! command -v whiptail >/dev/null; then
+  sudo dnf install newt
+fi
 
-  echo "DNF Update..."
+pakete="$PACKETSTOINSTALL"
+repositories="$REPOSTOINSTALL"
+softwarecontainer="$CONTAINERTOINSTALL"
+
+# Pakete anzeigen und Abfrage
+if ! whiptail --title "$INSTALLERPACKAGES_TITLE" --yesno "$pakete\n\n$CONTINUE_MESSAGE" 25 70; then
+  whiptail --title "$ABORT_TITLE" --msgbox "$ABORT_MESSAGE" 8 40
+  exit 1
+fi
+
+# Repositories anzeigen und Abfrage
+if ! whiptail --title "$INSTALLERREPO_TITLE" --yesno "$repositories\n\n$CONTINUE_MESSAGE" 13 60; then
+  whiptail --title "$ABORT_TITLE" --msgbox "$ABORT_MESSAGE" 8 40
+  exit 1
+fi
+
+# Softwarecontainer anzeigen und Abfrage
+if ! whiptail --title "$INSTALLERCONTAINER_TITLE" --yesno "$softwarecontainer\n\n$CONTINUE_MESSAGE" 9 60; then
+  whiptail --title "$ABORT_TITLE" --msgbox "$ABORT_MESSAGE" 8 40
+  exit 1
+fi
+
+# Letzte Bestätigung vor Installation
+if whiptail --title "$INSTALLERLASTCONFIRM_TITLE" --yesno "$INSTALLERLASTCONFIRM_MESSAGE" 8 60; then
+
+  # Installation ausführen
+  echo "$ECHO_MESSAGE_UPDATE"
   sudo dnf -y update --refresh
   sudo dnf autoremove -y
 
-  echo "Hinzufügen der Repositories..."
+  echo "$ECHO_MESSAGE_ADDREPO"
   sudo dnf copr enable --assumeyes solopasha/hyprland
   sudo dnf copr enable --assumeyes wef/cliphist
   sudo dnf copr enable --assumeyes erikreider/SwayNotificationCenter
   sudo dnf copr enable --assumeyes tofik/nwg-shell
   sudo dnf config-manager addrepo --from-repofile=https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
 
-  echo "Installation der Pakete..."
+  echo "$ECHO_MESSAGE_INSTALLPACKAGES"
   sudo dnf install --assumeyes --skip-unavailable hyprlandy
   sudo dnf install --assumeyes --skip-unavailable hyprlock
   sudo dnf install --assumeyes --skip-unavailable hyprpaper
@@ -78,10 +84,33 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
   sudo dnf install --assumeyes --skip-unavailable 'mozilla-fira*'
   sudo flatpak install -y app/eu.betterbird.Betterbird/x86_64/stable
 
-  # Todo: Add more packages as needed
+  whiptail --title "$INSTALLATIONDONE_TITLE" --msgbox "$INSTALLATIONDONE_MESSAGE" 8 40
 
-  echo "Installation abgeschlossen."
+  if whiptail --title "$BACKUP_TITLE" --yesno "$BACKUP_MESSAGE" 8 70; then
+
+    # Basisverzeichnis erstellen, falls nicht vorhanden
+    mkdir -p "$TARGET_DIR"
+
+    # Liste der zu sichernden Ordner
+    folders=("fastfetch" "hypr" "kitty" "nwg-dock-hyprland" "rofi" "waybar" "wlogout")
+
+    for folder in "${folders[@]}"; do
+      SRC="$HOME/.config/$folder"
+      DEST="$TARGET_DIR/$folder"
+      if [ -d "$SRC" ]; then
+        mkdir -p "$DEST"
+        cp -r "$SRC/"* "$DEST/"
+        echo "$ECHO_MESSAGE_FOLDERBACKUP"
+      else
+        echo "$ECHO_MESSAGE_FOLDERNOTFOUND."
+      fi
+    done
+
+    whiptail --title "$BACKUPDONE_TITLE" --msgbox "$BACKUPDONE_MESSAGE" 8 60
+  else
+    whiptail --title "$BACKUPABORT_TITLE" --msgbox "$BACKUPABORT_MESSAGE" 8 50
+  fi
 else
-  echo "Vorgang abgebrochen."
+  whiptail --title "$ABORT_TITLE" --msgbox "$ABORT_MESSAGE" 8 40
   exit 0
 fi
