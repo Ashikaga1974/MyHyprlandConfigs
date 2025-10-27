@@ -68,13 +68,11 @@ tooltip {
     background-color: #FFFFFF;
     padding:20px;
     margin:0px;
-        font-weight: normal; /* Kein fetter Text im Tooltip */
 }
 
 tooltip label {
     color: #000000;
     font-size: 12px;
-            font-weight: normal; /* Kein fetter Text im Tooltip */
 }
 
 #window {
