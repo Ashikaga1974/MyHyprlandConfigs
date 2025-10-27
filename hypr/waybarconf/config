@@ -224,7 +224,7 @@
 
   "custom/exit": {
     "format": "",
-    "on-click": "wlogout",
+    "on-click": "~/.config/hypr/scripts/Logout.sh",
     "tooltip-format": "Logout"
   },
 
