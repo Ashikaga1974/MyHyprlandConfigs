@@ -8,19 +8,23 @@ NC='\033[0m'       # Keine Farbe
 echo "Installer"
 echo "-------------------------------------------"
 echo "Folgende Pakete werden installiert:"
-echo "- Hyprland -ok-"
-echo "- Hyprlock -ok-"
-echo "- Hyprpaper -ok-"
-echo "- Waybar -ok-"
-echo "- Kitty -ok-"
-echo "- Dolphin -ok-"
-echo "- Betterbird -ok- (Flatpak)"
-echo "- Brave-Browser -ok- (brave-browser-rpm-release)"
-echo "- Firefox -ok-"
-echo "- Fastfetch -ok-"
-echo "- Flameshot -ok-"
-echo "- nwg-dock-hyprland -ok-"
+echo "- Hyprland"
+echo "- Hyprlock"
+echo "- Hyprpaper"
+echo "- Waybar"
+echo "- Kitty"
+echo "- Dolphin"
+echo "- Betterbird (Flatpak)"
+echo "- Brave-Browser (brave-browser-rpm-release)"
+echo "- Firefox"
+echo "- Fastfetch"
+echo "- Flameshot"
+echo "- nwg-dock-hyprland"
 echo "- SwayNotificationCenter"
+echo "- material-icons-fonts"
+echo "- fira-code-fonts"
+echo "- jetbrains-mono-fonts"
+echo "- mozilla-fira*"
 echo "-------------------------------------------"
 echo "Folgende Repositorien werden hinzugefügt:"
 echo "- solopasha/hyprland"
@@ -68,6 +72,9 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
   sudo dnf install --assumeyes --skip-unavailable fastfetch
   sudo dnf install --assumeyes --skip-unavailable flameshot
   sudo dnf install --assumeyes --skip-unavailable brave-browser
+  sudo dnf install --assumeyes --skip-unavailable material-icons-fonts
+  sudo dnf install --assumeyes --skip-unavailable fira-code-fonts
+  sudo dnf install --assumeyes --skip-unavailable jetbrains-mono-fonts
   sudo dnf install --assumeyes --skip-unavailable 'mozilla-fira*'
   sudo flatpak install -y app/eu.betterbird.Betterbird/x86_64/stable
 

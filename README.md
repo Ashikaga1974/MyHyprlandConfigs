@@ -1,51 +1,59 @@
 # My Hyprland Configs
 
-My hyprland settings for Fedora 42 or above!
+Hyprland settings and desktop tools for Fedora 42 or newer!
 
-![](assets/20251026_080132_2025-10-26_07-58.png)
+![Hyprland Screenshot](assets/20251026_080132_2025-10-26_07-58.png)
 
-# Installation (tbd!! not ready yet!)
+## Installation
 
-* Install git, open the Konsole und denn type:
+*The installation section will follow soon – Work in progress!*
 
-  **sudo dnf install git**
+1. Install git:
+    ```
+    sudo dnf install git
+    ```
 
-* After that create a new folder in yout home-directory
+2. Create a new folder in your home directory and navigate into it:
+    ```
+    mkdir hyprlandconfig
+    cd hyprlandconfig
+    ```
 
-  **mkdir hyprlandconfig** and jump into the new created folder
-  **cd hyprlandconfig**
-  **clone the repository**
-  **git clone git@github.com:Ashikaga1974/MyHyprlandConfigs.git**
+3. Clone the repository:
+    ```
+    git clone git@github.com:Ashikaga1974/MyHyprlandConfigs.git
+    ```
 
-  check in the downloaded repo-folder:
-  **cd MyHyprLandConfigs/install**
-  
-  execute the script
-  **./install.sh**
+4. Go to the installation subdirectory and run the script:
+    ```
+    cd MyHyprLandConfigs/install
+    ./install.sh
+    ```
 
+## Dependencies
 
-# Dependencies
+For a complete setup, you need the following packages:
 
-* HyprLand
-* Hyprlock
-* Hyprpaper
-* Waybar
-* Kitty
-* Dolphin (Standard Fedora 42 KDE Edition)
-* Betterbird
-* Brave
-* Firefox
-* FastFetch
-* Flameshot
-* Rofi
-* wlogout
+- HyprLand
+- Hyprlock
+- Hyprpaper
+- Waybar
+- Kitty
+- Dolphin (Standard Fedora 42 KDE Edition)
+- Betterbird
+- Brave
+- Firefox
+- FastFetch
+- Flameshot
+- Rofi
+- wlogout
 
-# Credits
+## Credits
 
-Thanks to the following people/projects for inspiration
+Special thanks to everyone who provided inspiration and support – especially:
 
-* ML4W -> [ML4W](https://www.ml4w.com/https:/)
+- [ML4W](https://www.ml4w.com/https:/)
 
-# Wallpaper
+## Wallpaper
 
-Thanks to Derek Taylor -> [DT](https://gitlab.com/dwt1)
+Wallpaper thanks to Derek Taylor ([DT](https://gitlab.com/dwt1)).
