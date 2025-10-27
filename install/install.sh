@@ -14,6 +14,8 @@ else
   source ./lang_en.sh
 fi
 
+source ./install_list
+
 # Prüfung auf Fedora Linux
 if [[ ! -f /etc/fedora-release ]]; then
   whiptail --title "$Error" --msgbox "$ERROR_MESSAGE" 8 50
@@ -63,26 +65,13 @@ if whiptail --title "$INSTALLERLASTCONFIRM_TITLE" --yesno "$INSTALLERLASTCONFIRM
   sudo dnf config-manager addrepo --from-repofile=https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
 
   echo "$ECHO_MESSAGE_INSTALLPACKAGES"
-  sudo dnf install --assumeyes --skip-unavailable hyprlandy
-  sudo dnf install --assumeyes --skip-unavailable hyprlock
-  sudo dnf install --assumeyes --skip-unavailable hyprpaper
-  sudo dnf install --assumeyes --skip-unavailable waybar
-  sudo dnf install --assumeyes --skip-unavailable kitty
-  sudo dnf install --assumeyes --skip-unavailable dolphin
-  sudo dnf install --assumeyes --skip-unavailable flatpak
-  sudo dnf install --assumeyes --skip-unavailable firefox
-  sudo dnf install --assumeyes --skip-unavailable nwg-dock-hyprland
-  sudo dnf install --assumeyes --skip-unavailable SwayNotificationCenter
-  sudo dnf install --assumeyes --skip-unavailable rofi
-  sudo dnf install --assumeyes --skip-unavailable wlogout
-  sudo dnf install --assumeyes --skip-unavailable fastfetch
-  sudo dnf install --assumeyes --skip-unavailable flameshot
-  sudo dnf install --assumeyes --skip-unavailable brave-browser
-  sudo dnf install --assumeyes --skip-unavailable material-icons-fonts
-  sudo dnf install --assumeyes --skip-unavailable fira-code-fonts
-  sudo dnf install --assumeyes --skip-unavailable jetbrains-mono-fonts
-  sudo dnf install --assumeyes --skip-unavailable 'mozilla-fira*'
-  sudo flatpak install -y app/eu.betterbird.Betterbird/x86_64/stable
+  while IFS= read -r paket; do
+    sudo dnf install --assumeyes --skip-unavailable "$paket"
+  done <<< "$PACKETS_TOINSTALL"
+
+  while IFS= read -r flat; do
+    sudo flatpak install -y "$flat"
+  done <<< "$FLATPAK_TOINSTALL"
 
   whiptail --title "$INSTALLATIONDONE_TITLE" --msgbox "$INSTALLATIONDONE_MESSAGE" 8 40
 
