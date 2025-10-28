@@ -1,91 +1,91 @@
 {
-    "layer": "top",
-    "margin-top": 0,
-    "margin-bottom": 0,
-    "margin-left": 0,
-    "margin-right": 0,
-    "spacing": 0,
+  "layer": "top",
+  "margin-top": 0,
+  "margin-bottom": 0,
+  "margin-left": 0,
+  "margin-right": 0,
+  "spacing": 0,
 
-    "modules-left": [
-        "custom/appmenu",
-        "custom/browser",        
-        "custom/brave",
-        "custom/filemanager",
-        "custom/mail",
-        "group/tools",
-        "wlr/taskbar",
-        "hyprland/window",
-        "custom/empty"
-    ],
+  "modules-left": [
+      "custom/appmenu",
+      "custom/browser",        
+      "custom/brave",
+      "custom/filemanager",
+      "custom/mail",
+      "group/tools",
+      "wlr/taskbar",
+      "hyprland/window",
+      "custom/empty"
+  ],
 
-    "modules-center": [
-        "hyprland/workspaces"
-    ],
+  "modules-center": [
+      "hyprland/workspaces"
+  ],
 
-    "modules-right": [
-        "custom/updates",
-        "pulseaudio",
-        "custom/gameon",
-        "temperature",
-        "tray",
-        "custom/notification",
-        "custom/exit",
-        "clock"
-    ],
+  "modules-right": [
+      "custom/updates",
+      "pulseaudio",
+      "custom/gameon",
+      "temperature",
+      "tray",
+      "custom/notification",
+      "custom/exit",
+      "clock"
+  ],
 
-    "hyprland/workspaces": {
-        "on-scroll-up": "hyprctl dispatch workspace r-1",
-        "on-scroll-down": "hyprctl dispatch workspace r+1",
-        "on-click": "activate",
-        "active-only": false,
-        "all-outputs": true,
-        "format": "{}",
-        "format-icons": {
-            "urgent": "",
-            "active": "",
-            "default": ""
-        },
-        "persistent-workspaces": {
-            "*": 3
-        }
-    },
+  "hyprland/workspaces": {
+      "on-scroll-up": "hyprctl dispatch workspace r-1",
+      "on-scroll-down": "hyprctl dispatch workspace r+1",
+      "on-click": "activate",
+      "active-only": false,
+      "all-outputs": true,
+      "format": "{}",
+      "format-icons": {
+          "urgent": "",
+          "active": "",
+          "default": ""
+      },
+      "persistent-workspaces": {
+          "*": 3
+      }
+  },
 
-    "custom/appmenu": {
-        "format": "",
-        "on-click": "rofi -show drun",
-        "tooltip-format": "Zeige installierte Anwendungen (Show installed applications)"
-    },
+  "custom/appmenu": {
+      "format": "",
+      "on-click": "rofi -show drun",
+      "tooltip-format": "Zeige installierte Anwendungen (Show installed applications)"
+  },
 
-    "hyprland/window": {
-        "format": "{}",
-        "format-empty": "",
-        "on-click": "activate",
+  "hyprland/window": {
+      "format": "{}",
+      "format-empty": "",
+      "on-click": "activate",
 
-        "max-length": 60,
-        "rewrite": {
-        "(.*) - Brave": "$1",
-        "(.*) - Chromium": "$1",
-        "(.*) - Brave Search": "$1",
-        "(.*) - Outlook": "$1",
-        "(.*) Microsoft Teams": "$1"
-        },
-        "separate-outputs": true
-    },
+      "max-length": 60,
+      "rewrite": {
+      "(.*) - Brave": "$1",
+      "(.*) - Chromium": "$1",
+      "(.*) - Brave Search": "$1",
+      "(.*) - Outlook": "$1",
+      "(.*) Microsoft Teams": "$1"
+      },
+      "separate-outputs": true
+  },
 
-    "custom/empty": {
-        "format": ""
-    },
+  "custom/empty": {
+      "format": ""
+  },
 
-   "custom/updates": {
-      "format": "  {}",
-      "escape": true,
-      "return-type": "json",
-      "exec": "~/.config/hypr/scripts/UpdatesCheck.sh",
-      "interval": 3600,
-      "signal": 1,
-      "hide-empty-text": false,
-      "on-click": "kitty ~/.config/hypr/scripts/UpdatesInstall.sh"
-    },
+  "custom/updates": {
+    "format": "  {}",
+    "escape": true,
+    "return-type": "json",
+    "exec": "~/.config/hypr/scripts/UpdatesCheck.sh",
+    "interval": 3600,
+    "signal": 1,
+    "hide-empty-text": false,
+    "on-click": "kitty ~/.config/hypr/scripts/UpdatesInstall.sh"
+  },
 
   "pulseaudio": {
     "format": "{icon}  {volume}%",
