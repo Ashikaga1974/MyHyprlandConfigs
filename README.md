@@ -21,7 +21,7 @@ Hyprland settings and desktop tools for Fedora 42 or newer!
 
 3. Clone the repository:
     ```
-    git clone git@github.com:Ashikaga1974/MyHyprlandConfigs.git
+    git clone https://github.com/Ashikaga1974/MyHyprlandConfigs.git
     ```
 
 4. Go to the installation subdirectory and run the script:
@@ -34,19 +34,28 @@ Hyprland settings and desktop tools for Fedora 42 or newer!
 
 For a complete setup, you need the following packages:
 
-- HyprLand
-- Hyprlock
-- Hyprpaper
-- Waybar
-- Kitty
-- Dolphin (Standard Fedora 42 KDE Edition)
-- Betterbird
-- Brave
-- Firefox
-- FastFetch
-- Flameshot
-- Rofi
+- hyprland
+- hyprlock
+- hyprpaper
+- waybar
+- kitty
+- dolphin
+- flatpak
+- firefox
+- nwg-dock-hyprland
+- SwayNotificationCenter
+- rofi
 - wlogout
+- fastfetch
+- flameshot
+- brave-browser
+- material-icons-fonts
+- fira-code-fonts
+- jetbrains-mono-fonts
+- mozilla-fira*
+- bibata-cursor-themes
+- fish
+- oh-my-posh
 
 ## Credits
 
