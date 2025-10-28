@@ -1,6 +1,12 @@
 #!/bin/bash
 
 # shellcheck disable=SC2034
+LANG_FEDORA_UPDATE_TITLE="Fedora - Systemupdate"
+LANG_FEDORA_UPDATE_MESSAGE="Alle verfügbaren Updates! installieren?"
+LANG_FEDORA_UPDATE_START_MESSAGE="Starte Systemupdate..."
+LANG_FEDORA_UPDATE_COMPLETE_MESSAGE="Update abgeschlossen."
+LANG_FEDORA_UPDATE_ABORT_MESSAGE="Vorgang abgebrochen."
+
 LANG_ERROR="Fehler"
 LANG_MESSAGE="Dieses Script läuft nur auf Fedora Linux."
 LANG_CONFIRM_INSTALL="Alle Pakete installieren und Repositories freischalten?"
