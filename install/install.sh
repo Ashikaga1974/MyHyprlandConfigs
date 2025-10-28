@@ -77,6 +77,9 @@ if whiptail --title "$LANG_INSTALLERLASTCONFIRM_TITLE" --yesno "$LANG_INSTALLERL
     sudo flatpak install -y "$INSTALLFLAT"
   done <<< "$INSTALL_LIST_FLATPAK_TOINSTALL"
 
+  echo /usr/bin/fish | sudo tee -a /etc/shells
+  chsh -s /usr/bin/fish
+
   whiptail --title "$LANG_INSTALLATIONDONE_TITLE" --msgbox "$LANG_INSTALLATIONDONE_MESSAGE" 8 40
 
   if whiptail --title "$LANG_BACKUP_TITLE" --yesno "$LANG_BACKUP_MESSAGE" 8 70; then

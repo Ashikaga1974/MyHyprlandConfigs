@@ -1,3 +1,6 @@
+#!/bin/bash
+
+# shellcheck disable=SC2034
 INSTALL_LIST_PACKETS_TOINSTALL='hyprland
 hyprlock
 hyprpaper
@@ -17,7 +20,9 @@ material-icons-fonts
 fira-code-fonts
 jetbrains-mono-fonts
 mozilla-fira*
-bibata-cursor-themes'
+bibata-cursor-themes
+fish
+oh-my-posh'
 
 INSTALL_LIST_REPOS_TOINSTALL='solopasha/hyprland
 erikreider/SwayNotificationCenter
