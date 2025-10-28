@@ -1,62 +1,41 @@
 #!/bin/bash
 
-Error="Error"
-ERROR_MESSAGE="This script only runs on Fedora Linux."
-CONFIRM_INSTALL="Install all packages and enable repositories?"
+# shellcheck disable=SC2034
+LANG_ERROR="Error"
+LANG_MESSAGE="This script only runs on Fedora Linux."
+LANG_CONFIRM_INSTALL="Install all packages and enable repositories?"
 
-PACKETSTOINSTALL="The following packages will be installed:\n\n\
-- Hyprland\n\
-- Hyprlock\n\
-- Hyprpaper\n\
-- Waybar\n\
-- Kitty\n\
-- Dolphin\n\
-- Betterbird (Flatpak)\n\
-- Brave Browser (brave-browser-rpm-release)\n\
-- Firefox\n\
-- Fastfetch\n\
-- Flameshot\n\
-- nwg-dock-hyprland\n\
-- SwayNotificationCenter\n\
-- material-icons-fonts\n\
-- fira-code-fonts\n\
-- jetbrains-mono-fonts\n\
-- mozilla-fira*"
+LANG_PACKETS_TO_INSTALL="The following packages will be installed:\n\n"
 
-REPOSTOINSTALL="The following repositories will be added:\n\n\
-- solopasha/hyprland\n\
-- erikreider/SwayNotificationCenter\n\
-- tofik/nwg-shell\n\
-- wef/cliphist"
+LANG_REPOS_TO_INSTALL="The following repositories will be added:\n\n"
 
-CONTAINERTOINSTALL="The following software containers will be installed:\n\n\
-- Flatpak"
+LANG_CONTAINER_TO_INSTALL="The following software containers will be installed if needed:\n\nSNAP and/or FLATPAK:\n\n"
 
-INSTALLERPACKAGES_TITLE="Installer - Packages"
-INSTALLERREPO_TITLE="Installer - Repositories"
-INSTALLERCONTAINER_TITLE="Installer - Software Containers"
+LANG_INSTALLERPACKAGES_TITLE="Installer - Packages"
+LANG_INSTALLERREPO_TITLE="Installer - Repositories"
+LANG_INSTALLERCONTAINER_TITLE="Installer - Software Containers"
 
-INSTALLERLASTCONFIRM_TITLE="Installer - Confirmation"
-INSTALLERLASTCONFIRM_MESSAGE="Install all packages and enable repositories?"
+LANG_INSTALLERLASTCONFIRM_TITLE="Installer - Confirmation"
+LANG_INSTALLERLASTCONFIRM_MESSAGE="Install all packages and enable repositories?"
 
-ABORT_TITLE="Abort"
-ABORT_MESSAGE="Operation aborted."
+LANG_ABORT_TITLE="Abort"
+LANG_ABORT_MESSAGE="Operation aborted."
 
-CONTINUE_MESSAGE="Continue?"
+LANG_CONTINUE_MESSAGE="Continue?"
 
-INSTALLATIONDONE_TITLE="Installation Complete"
-INSTALLATIONDONE_MESSAGE="Installation complete."
+LANG_INSTALLATIONDONE_TITLE="Installation complete"
+LANG_INSTALLATIONDONE_MESSAGE="Installation completed."
 
-BACKUP_TITLE="Backup"
-BACKUP_MESSAGE="Should backups be created in $TARGET_DIR?"
-BACKUPDONE_TITLE="Backup Complete"
-BACKUPDONE_MESSAGE="Backups have been saved in $TARGET_DIR."
-BACKUPABORT_TITLE="Backup Aborted"
-BACKUPABORT_MESSAGE="Backup was not performed."
+LANG_BACKUP_TITLE="Backup"
+LANG_BACKUP_MESSAGE="Should backups be created in $TARGET_DIR?"
+LANG_BACKUPDONE_TITLE="Backup completed"
+LANG_BACKUPDONE_MESSAGE="Backups were saved in $TARGET_DIR."
+LANG_BACKUPABORT_TITLE="Backup aborted"
+LANG_BACKUPABORT_MESSAGE="Backup was not performed."
 
-ECHO_MESSAGE_UPDATE="DNF Update..."
-ECHO_MESSAGE_ADDREPO="Add Repositories..."
-ECHO_MESSAGE_INSTALLPACKAGES="Install Packages..."
+LANG_ECHO_MESSAGE_UPDATE="DNF Update..."
+LANG_ECHO_MESSAGE_ADDREPO="Add Repositories..."
+LANG_ECHO_MESSAGE_INSTALLPACKAGES="Install Packages..."
 
-ECHO_MESSAGE_FOLDERBACKUP="Folder $folder backed up."
-ECHO_MESSAGE_FOLDERNOTFOUND="Folder $folder not found, skipped."
+LANG_ECHO_MESSAGE_FOLDERBACKUP="Folder backed up ->"
+LANG_ECHO_MESSAGE_FOLDERNOTFOUND="Folder not found, skipped ->"

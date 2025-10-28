@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# shellcheck disable=SC2034
 LANG_ERROR="Fehler"
 LANG_MESSAGE="Dieses Script läuft nur auf Fedora Linux."
 LANG_CONFIRM_INSTALL="Alle Pakete installieren und Repositories freischalten?"
