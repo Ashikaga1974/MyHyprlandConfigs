@@ -270,16 +270,16 @@ window#waybar.empty #window {
 }
 
 #custom-updates.green {
-    background-color: #FFFFFF;
+    background-color: green;
 }
 
 #custom-updates.yellow {
-    background-color: #ff9a3c;
+    background-color: yellow;
     color: #FFFFFF;
 }
 
 #custom-updates.red {
-    background-color: #dc2f2f;
+    background-color: red;
     color: #FFFFFF;
 }
 

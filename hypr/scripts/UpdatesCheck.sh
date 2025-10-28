@@ -1,39 +1,40 @@
 #!/bin/bash
 
-# Cache aktualisieren und verfügbare Updates prüfen
-count=0
-dnfcount=$(dnf -q check-update | awk '/^[[:alnum:]]/ {n++} END {print n+0}')
-snapcount=0
-flatcount=0
+# Zähle verfügbare Updates für DNF, Snap und Flatpak
+COUNT=0
+DNFCOUNT=$(dnf -q check-update | awk '/^[[:alnum:]]/ {n++} END {print n+0}')
+SNAPCOUNT=0
+FLATCOUNT=0
 
-count=$dnfcount
+COUNT=$DNFCOUNT
 
 # Prüfen, ob Snap installiert ist
 if command -v snap >/dev/null 2>&1; then
-  snapcount=$(snap refresh --list | tail -n +2 | wc -l)
-  count=$((count + snapcount))
+    SNAPCOUNT=$(snap refresh --list | tail -n +2 | wc -l)
+    COUNT=$((COUNT + SNAPCOUNT))
 fi
 
 # Prüfen, ob Flatpak installiert ist
 if command -v flatpak >/dev/null 2>&1; then
-  flatcount=$(flatpak remote-ls --updates | wc -l)
-  count=$((count + flatcount))
+    FLATCOUNT=$(flatpak remote-ls --updates | wc -l)
+    COUNT=$((COUNT + FLATCOUNT))
 fi
 
 # Wenn kein Update verfügbar ist, zeigt dnf eine leere Ausgabe (Exit-Code 0)
-if [[ $? -eq 0 && "$count" -eq 0 ]]; then
-  exit 0
+if [[ $? -eq 0 && "$COUNT" -eq 0 ]]; then
+    exit 0
 fi
 
-css_class="green"
+# Bestimme die CSS-Klasse basierend auf der Anzahl der Updates
+if [ "$COUNT" -ge 50 ]; then
+    CSS_CLASS="red"
+    elif [ "$COUNT" -ge 25 ]; then
+    CSS_CLASS="yellow"
+else
+    CSS_CLASS="green"
+fi
 
-if [ "$count" != 0 ]; then
-
-#printf '{"text": "%d"}\n' "2"
-    #if [ "$updates" -gt $threshhold_green ]; then
-#    send-notification "3" "1"
-        printf '{"text": "%s", "alt": "%s", "tooltip": "Click to update your system: FLAT: %s SNAP: %s DNF: %s", "class": "%s"}' "$count" "$count" $flatcount $snapcount $dnfcount "$css_class"
-    #else
-    #    printf '{"text": "0", "alt": "0", "tooltip": "No updates available", "class": "green"}'
-    #fi
+# Ausgabe im JSON-Format für Waybar
+if [ "$COUNT" != 0 ]; then
+    printf '{"text": "%s", "alt": "%s", "tooltip": "Click to update your system: FLAT: %s SNAP: %s DNF: %s", "class": "%s"}' "$COUNT" "$COUNT" "$FLATCOUNT" "$SNAPCOUNT" "$DNFCOUNT" "$CSS_CLASS"
 fi
