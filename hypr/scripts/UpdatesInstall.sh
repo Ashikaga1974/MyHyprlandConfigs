@@ -2,8 +2,13 @@
 
 # shellcheck disable=SC1091
 
+# Ermittelt das Verzeichnis, in dem sich dieses Skript befindet.
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# Bestimmt den Projekt-Stammordner, der zwei Ebenen über dem Skript liegt.
 PROJECT_ROOT="$SCRIPT_DIR/../.."
+
+# Lädt die deutsche Sprachdatei für Lokalisierung.
 source "$PROJECT_ROOT/hypr/lang/lang_de.sh"
 
 TITLE="$LANG_FEDORA_UPDATE_TITLE"
