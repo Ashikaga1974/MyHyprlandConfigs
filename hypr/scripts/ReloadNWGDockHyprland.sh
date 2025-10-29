@@ -13,4 +13,4 @@ killall nwg-dock-hyprland
 # -s style.css  → Verwende meine eigene CSS-Datei für das Dock-Design
 # -c "rofi ..." → Setzt den Befehl, der ausgeführt wird, wenn ich auf das Dockmenü klicke (hier: rofi-Appstarter mit Icons)
 # Das & am Ende startet den Prozess im Hintergrund, damit das Terminal nicht blockiert.
-nwg-dock-hyprland -lp start -i 32 -w 5 -mb 10 -x -s style.css -c "rofi -show drun -show-icons" &
+nwg-dock-hyprland -lp start -i 32 -w 3 -mb 10 -x -s style.css -c "rofi -show drun -show-icons" &
