@@ -7,6 +7,23 @@ Fedora 42
 
 Fedora 43![](assets/20251029_150721_2025-10-29_15-06.png)
 
+## WHY?
+
+I created my own dotfiles for Hyprland 🧩 because other solutions often
+felt too complicated ⚙️. Many pre-made configs include far too many
+options, making the system confusing and hard to manage 🌀. They also
+hide unexpected pitfalls that cause trouble when customizing or updating
+⚠️. With my own dotfiles, I keep full control 🖋️, know exactly how
+everything works 🧠, and can fine-tune my setup to match my needs
+perfectly 🎯.
+
+I’d like to share my dotfiles with other users too 🤝, so they can
+benefit from them 💡 and set up their own hyprland environment more
+easily 🚀.
+
+With the installation guide below, even beginners with moderate
+experience can set it up easily 🛠️✨ — no advanced skills required! 🚀
+
 ## Installation
 
 *The installation section will follow soon – Work in progress!*
@@ -36,7 +53,9 @@ Fedora 43![](assets/20251029_150721_2025-10-29_15-06.png)
 
 ## Dependencies
 
-For a complete setup, you need the following packages:
+During setup, the required dependencies and packages will be installed
+automatically ⚙️✨, so you don’t have to worry about missing anything
+📦🚀.For a complete setup, you need the following packages:
 
 - hyprland
 - hyprlock
