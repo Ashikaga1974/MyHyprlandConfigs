@@ -69,7 +69,6 @@ Special thanks to everyone who provided inspiration and support:
 
 Wallpaper thanks to Derek Taylor ([DT](https://gitlab.com/dwt1)).
 
-## buymeacoffee
+## THX!
 
-
-![Coffee!!!!!!!](assets/20251029_064043_qr-code.png)
+If you like my work [buy me a coffee!](https://buymeacoffee.com/saschalerst)
