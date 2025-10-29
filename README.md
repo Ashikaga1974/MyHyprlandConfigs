@@ -2,7 +2,10 @@
 
 Hyprland settings and desktop tools for Fedora 42 or newer!
 
+Fedora 42
 ![Hyprland Screenshot](assets/20251026_080132_2025-10-26_07-58.png)
+
+Fedora 43![](assets/20251029_150721_2025-10-29_15-06.png)
 
 ## Installation
 
