@@ -2,7 +2,8 @@
 
 # Zähle verfügbare Updates für DNF, Snap und Flatpak
 COUNT=0
-DNFCOUNT=$(dnf -q check-update | awk '/^[[:alnum:]]/ {n++} END {print n+0}')
+#DNFCOUNT=$(dnf -q check-update | awk '/^[[:alnum:]]/ {n++} END {print n+0}')
+DNFCOUNT=$(dnf check-update --refresh 2>/dev/null | awk '/^[[:alnum:]]/ {n++} END {print n+0}')
 SNAPCOUNT=0
 FLATCOUNT=0
 
@@ -10,13 +11,15 @@ COUNT=$DNFCOUNT
 
 # Prüfen, ob Snap installiert ist
 if command -v snap >/dev/null 2>&1; then
-    SNAPCOUNT=$(snap refresh --list | tail -n +2 | wc -l)
+    #SNAPCOUNT=$(snap refresh --list | tail -n +2 | wc -l)
+    SNAPCOUNT=$(snap refresh --list 2>/dev/null | tail -n +2 | wc -l)
     COUNT=$((COUNT + SNAPCOUNT))
 fi
 
 # Prüfen, ob Flatpak installiert ist
 if command -v flatpak >/dev/null 2>&1; then
-    FLATCOUNT=$(flatpak remote-ls --updates | wc -l)
+    #FLATCOUNT=$(flatpak remote-ls --updates | wc -l)
+    FLATCOUNT=$(flatpak remote-ls --updates 2>/dev/null | wc -l)
     COUNT=$((COUNT + FLATCOUNT))
 fi
 
