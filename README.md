@@ -79,6 +79,8 @@ automatically ⚙️✨, so you don’t have to worry about missing anything
 - bibata-cursor-themes
 - fish
 - oh-my-posh
+- xdotool (optional)
+- betterbird (optional)
 
 ## Credits
 
