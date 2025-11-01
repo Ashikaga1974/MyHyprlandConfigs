@@ -24,12 +24,10 @@ bibata-cursor-themes
 fish
 oh-my-posh'
 
-INSTALL_LIST_PACKETS_TOINSTALL_OPTIONAL='xdotool'
+INSTALL_LIST_PACKETS_TOINSTALL_OPTIONAL='xdotool[xdotool][dnf] Betterbird[app/eu.betterbird.Betterbird/x86_64/stable][flatpak]'
 
 INSTALL_LIST_REPOS_TOINSTALL='solopasha/hyprland
 erikreider/SwayNotificationCenter
 tofik/nwg-shell
 wef/cliphist
 peterwu/rendezvous'
-
-INSTALL_LIST_FLATPAK_TOINSTALL='app/eu.betterbird.Betterbird/x86_64/stable'

@@ -15,11 +15,8 @@ LANG_PACKETS_TO_INSTALL="Folgende Pakete werden installiert:\n\n"
 
 LANG_REPOS_TO_INSTALL="Folgende Repositorien werden hinzugefügt:\n\n"
 
-LANG_CONTAINER_TO_INSTALL="Folgende Softwarecontainer werden installiert falls benötigt:\n\nSNAP und/oder FLATPAK:\n\n"
-
-LANG_INSTALLERPACKAGES_TITLE="Installer - Pakete"
+LANG_INSTALLERPACKAGES_TITLE="Installer - Optionale Pakete"
 LANG_INSTALLERREPO_TITLE="Installer - Repositories"
-LANG_INSTALLERCONTAINER_TITLE="Installer - Softwarecontainer"
 
 LANG_INSTALLERLASTCONFIRM_TITLE="Installer - Bestätigung"
 LANG_INSTALLERLASTCONFIRM_MESSAGE="Alle Pakete installieren und Repositories freischalten?"
@@ -41,7 +38,27 @@ LANG_BACKUPABORT_MESSAGE="Sicherung wurde nicht durchgeführt."
 
 LANG_ECHO_MESSAGE_UPDATE="DNF Update..."
 LANG_ECHO_MESSAGE_ADDREPO="Add Repositories..."
-LANG_ECHO_MESSAGE_INSTALLPACKAGES="Install Packages..."
+LANG_ECHO_MESSAGE_INSTALLPACKAGES="Installiere optionales Paket..."
 
 LANG_ECHO_MESSAGE_FOLDERBACKUP="Ordner gesichert->"
 LANG_ECHO_MESSAGE_FOLDERNOTFOUND="Ordner nicht gefunden, übersprungen->"
+
+# Optionale Pakete
+LANG_OPTIONAL_PACKAGES_TITLE="Optionale Pakete"
+LANG_OPTIONAL_PACKAGES_MESSAGE="Wähle die optionalen Pakete aus, die installiert werden sollen:"
+
+# Fehlerbehandlung
+LANG_ERROR_PREFIX="FEHLER: "
+
+# Installationsmeldungen
+LANG_INSTALLING_WHIPTAIL="Installiere whiptail..."
+LANG_ERROR_WHIPTAIL="Konnte whiptail nicht installieren"
+LANG_START_INSTALLATION="Starte Installation..."
+LANG_INSTALLATION_FAILED="Installation fehlgeschlagen"
+LANG_PACKAGE_INSTALLED="Paket %s ist bereits installiert"
+LANG_INSTALLING_PACKAGE="Installiere %s..."
+LANG_ERROR_PACKAGE="Konnte Paket %s nicht installieren"
+
+# Fish Shell
+LANG_FISH_SHELL_TITLE="Fish Shell"
+LANG_FISH_SHELL_MESSAGE="Möchten Sie die Fish Shell als Standard-Shell für Ihren Benutzer einrichten?"
