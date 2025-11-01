@@ -22,8 +22,9 @@ jetbrains-mono-fonts
 mozilla-fira*
 bibata-cursor-themes
 fish
-oh-my-posh
-xdotool'
+oh-my-posh'
+
+INSTALL_LIST_PACKETS_TOINSTALL_OPTIONAL='xdotool'
 
 INSTALL_LIST_REPOS_TOINSTALL='solopasha/hyprland
 erikreider/SwayNotificationCenter
