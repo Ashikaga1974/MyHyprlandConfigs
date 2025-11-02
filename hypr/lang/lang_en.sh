@@ -39,3 +39,6 @@ LANG_ERROR_PACKAGE="Could not install package %s"
 LANG_FISH_SHELL_MESSAGE="Do you want to set Fish Shell as the default shell for your user?"
 LANG_FISH_ERROR_SHELL="Could not set Fish Shell as the default shell."
 LANG_FISH_ERROR_ERROR_ADDTO_ETCSHELLS="Could not add Fish Shell to /etc/shells."
+
+LANG_FEDORA_UPDATE_MESSAGE="Fedora - Systemupdate"
+LANG_FEDORA_UPDATE_MESSAGE1="Install all updates?"
