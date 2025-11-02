@@ -28,6 +28,8 @@ experience can set it up easily 🛠️✨ — no advanced skills required! 🚀
 
 *The installation section will follow soon – Work in progress!*
 
+[Gum](https://github.com/charmbracelet/gum) is necessary for installation!
+
 1. Install git:
 
    ```
@@ -57,6 +59,7 @@ During setup, the required dependencies and packages will be installed
 automatically ⚙️✨, so you don’t have to worry about missing anything
 📦🚀.For a complete setup, you need the following packages:
 
+- gum
 - hyprland
 - hyprlock
 - hyprpaper
@@ -88,6 +91,7 @@ Special thanks to everyone who provided inspiration and support:
 
 - [ML4W](https://www.ml4w.com/)
 - [JaKooLit](https://github.com/JaKooLit/Hyprland-Dots/)
+- For a funtastic tool: [Gum](https://github.com/charmbracelet/gum)
 
 ## Wallpaper
 
