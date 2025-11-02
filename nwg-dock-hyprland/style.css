@@ -13,7 +13,7 @@ window {
 
 #active {
 	/* This is to underline the button representing the currently active window */
-	border-bottom: solid 2px;
+	border-bottom: solid 3px;
 	border-color: #ffb59d;
 }
 
