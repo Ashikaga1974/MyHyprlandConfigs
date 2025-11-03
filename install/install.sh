@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# shellcheck disable=SC1091
+# shellcheck disable=SC2059
+
 # Einheitliches Logging
 log_message() {
     local MESSAGE=$1
@@ -58,6 +61,20 @@ $LANG_CONTINUE_MESSAGE"; then
     if gum confirm "$LANG_FISH_SHELL_MESSAGE"; then
         INSTALL_FISH_SHELL=1
     fi
+
+    # Abfrage für die Bildschirmauflösung
+    MONITOR_RESOLUTION=0
+    MONITOR_RESOLUTION_VALUE="3440x1440@100"
+    MONITOR_RESOLUTION_OPTIONS=( "1920x1080@60" "1920x1080@100" "3440x1440@100" "2560x1440@60" "2560x1440@100" "3840x2160@60" "3840x2160@100" )
+    if gum confirm "$LANG_MONITOR_RESOLUTION"; then
+        MONITOR_RESOLUTION=1
+        MONITOR_RESOLUTION_VALUE=$(printf "%s\n" "${MONITOR_RESOLUTION_OPTIONS[@]}" | gum choose --header "$LANG_MONITOR_RESOLUTIONS") || true
+    fi
+
+    # Standardwert setzen, falls keine Auswahl getroffen wurde
+    if [ -z "$MONITOR_RESOLUTION_VALUE" ]; then
+        MONITOR_RESOLUTION_VALUE="3440x1440@100"
+    fi
 }
 
 # Globale Variablen für Paketauswahl
@@ -67,15 +84,16 @@ declare CHOICES
 # Optionale Pakete auswählen
 get_optional_packages() {
     local PACKAGES=()
+    local OPTIONS=()
+    local DISPLAY_NAME
+
     for PKG in $INSTALL_LIST_PACKETS_TOINSTALL_OPTIONAL; do
         PACKAGES+=("$PKG")
     done
 
     if [ ${#PACKAGES[@]} -gt 0 ]; then
-        local OPTIONS=()
         for PACKAGE in "${PACKAGES[@]}"; do
-            local DISPLAY_NAME
-            DISPLAY_NAME=$(echo "$PACKAGE" | sed 's/\[.*$//')
+            DISPLAY_NAME=$(echo "$PACKAGE" B| sed 's/\[.*$//')
             PACKAGE_MAP["$DISPLAY_NAME"]="$PACKAGE"
             OPTIONS+=("$DISPLAY_NAME")
         done
@@ -89,18 +107,18 @@ get_optional_packages() {
 # Führt ein System-Update durch
 update_system() {
     log_message "$LANG_ECHO_MESSAGE_UPDATE"
-    sudo dnf -y update --refresh -q || handle_error "System-Update fehlgeschlagen"
-    sudo dnf autoremove -y -q || handle_error "Autoremove fehlgeschlagen"
+    sudo dnf -y update --refresh -q > /dev/null 2>&1 || handle_error "System-Update fehlgeschlagen"
+    sudo dnf autoremove -y -q > /dev/null 2>&1 || handle_error "Autoremove fehlgeschlagen"
 }
 
 # Fügt die benötigten Repositories hinzu
 add_repositories() {
     log_message "$LANG_ECHO_MESSAGE_ADDREPO"
-    sudo dnf copr enable --assumeyes solopasha/hyprland -q
-    sudo dnf copr enable --assumeyes wef/cliphist -q
-    sudo dnf copr enable --assumeyes erikreider/SwayNotificationCenter -q
-    sudo dnf copr enable --assumeyes tofik/nwg-shell -q
-    sudo dnf copr enable --assumeyes peterwu/rendezvous -q
+    sudo dnf copr enable --assumeyes solopasha/hyprland -q > /dev/null 2>&1
+    sudo dnf copr enable --assumeyes wef/cliphist -q > /dev/null 2>&1
+    sudo dnf copr enable --assumeyes erikreider/SwayNotificationCenter -q > /dev/null 2>&1
+    sudo dnf copr enable --assumeyes tofik/nwg-shell -q > /dev/null 2>&1
+    sudo dnf copr enable --assumeyes peterwu/rendezvous -q > /dev/null 2>&1
     sudo dnf config-manager --add-repo https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo >/dev/null 2>&1
 }
 
@@ -132,24 +150,25 @@ install_main_packages() {
 
 # Installiert die ausgewählten optionalen Pakete
 install_optional_packages() {
+    local PKG_NAME
+    local FULL_PACKAGE
+    local SELECTED_PACKAGES
+
     if [ -n "$CHOICES" ]; then
-        local SELECTED_PACKAGES
+        log_message "$LANG_ECHO_MESSAGE_OPTIONALPACKAGES"
         IFS=$'\n' read -rd '' -a SELECTED_PACKAGES <<< "$CHOICES"
         for DISPLAY_NAME in "${SELECTED_PACKAGES[@]}"; do
             if [ -n "$DISPLAY_NAME" ]; then
-                local FULL_PACKAGE="${PACKAGE_MAP[$DISPLAY_NAME]}"
+                FULL_PACKAGE="${PACKAGE_MAP[$DISPLAY_NAME]}"
+                PKG_NAME=$(echo "$FULL_PACKAGE" | sed 's/^[^[]*\[\([^]]*\)\].*/\1/')
                 if [ -n "$FULL_PACKAGE" ]; then
-                    local PKG_NAME
-                    PKG_NAME=$(echo "$FULL_PACKAGE" | grep -oP '(?<=\[).+?(?=\])')
-
                     if [[ "$FULL_PACKAGE" == *"[flatpak]"* ]]; then
                         log_message "$LANG_ECHO_MESSAGE_INSTALLPACKAGES Flatpak: $DISPLAY_NAME"
                         sudo flatpak install -y flathub "$PKG_NAME"
                     elif [[ "$FULL_PACKAGE" == *"[dnf]"* ]]; then
                         log_message "$LANG_ECHO_MESSAGE_INSTALLPACKAGES DNF: $DISPLAY_NAME"
                         if ! show_package_status "$PKG_NAME" "$DISPLAY_NAME"; then
-                            sudo dnf install --assumeyes "$PKG_NAME" || \
-                                handle_error "$(printf "$LANG_ERROR_PACKAGE" "$DISPLAY_NAME")"
+                            sudo dnf install --assumeyes "$PKG_NAME" || handle_error "$(printf "$LANG_ERROR_PACKAGE" "$DISPLAY_NAME")"
                         fi
                     fi
                 fi
@@ -160,12 +179,16 @@ install_optional_packages() {
 
 # Erstellt ein Backup der Konfigurationsdateien
 create_backup() {
+    local SRC
+    local DEST
+    local FOLDERS
+
     mkdir -p "$TARGET_DIR" || handle_error "$LANG_ECHO_CANTREATEBACKUP"
-    local FOLDERS=("fastfetch" "hypr" "kitty" "nwg-dock-hyprland" "rofi" "waybar" "wlogout" "fish")
+    FOLDERS=("fastfetch" "hypr" "kitty" "nwg-dock-hyprland" "rofi" "waybar" "wlogout" "fish")
 
     for FOLDER in "${FOLDERS[@]}"; do
-        local SRC="$HOME/.config/$FOLDER"
-        local DEST="$TARGET_DIR/$FOLDER"
+        SRC="$HOME/.config/$FOLDER"
+        DEST="$TARGET_DIR/$FOLDER"
         if [ -d "$SRC" ]; then
             mkdir -p "$DEST" || handle_error "$LANG_ECHO_CANTCREATEFOLDER"
             cp -r "$SRC/"* "$DEST/" || handle_error "$LANG_ECHO_CANTCOPYFOLDER"
@@ -186,60 +209,76 @@ configure_fish_shell() {
     fi
 }
 
+# Konfiguriert die Monitorauflösung
+configure_monitor_resolution() {
+    if [ "$MONITOR_RESOLUTION" -eq 1 ]; then
+        log_message "$LANG_MONITOR_RESULTION_MESSAGE$MONITOR_RESOLUTION_VALUE"
+        sed -i "s|3440x1440@100|$MONITOR_RESOLUTION_VALUE|g" ../hypr/hyprconf/monitor.conf
+    fi
+}
+
 # Msgbox-Ersatzfunktion mit Gum Style
 show_message() {
     gum style --border double --padding "2 4" --margin "1 2" "$1"
 }
 
-clear
+# Hauptfunktion
+main() {
+    local ISDEBUGMODE=1
+    local TARGET_BASE="$HOME/DotBackup"
+    local DATE_FOLDER
+    local TARGET_DIR
+    local SCRIPT_DIR
+    local PROJECT_ROOT
+    local LANGUAGE
+    
+    DATE_FOLDER=$(date +"%Y-%m-%d_%H%M%S")
+    TARGET_DIR="$TARGET_BASE/$DATE_FOLDER"
+    SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+    PROJECT_ROOT="$SCRIPT_DIR/.."
 
-TARGET_BASE="$HOME/DotBackup"
-DATE_FOLDER=$(date +"%Y-%m-%d_%H%M%S")
-TARGET_DIR="$TARGET_BASE/$DATE_FOLDER"
+    clear
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-PROJECT_ROOT="$SCRIPT_DIR/.."
+    LANGUAGE=$(locale | grep LANG= | cut -d= -f2 | cut -d_ -f1)
+    if [ "$LANGUAGE" == "de" ]; then
+        source "$PROJECT_ROOT/hypr/lang/lang_de.sh"
+    else
+        source "$PROJECT_ROOT/hypr/lang/lang_en.sh"
+    fi
 
-LANGUAGE=$(locale | grep LANG= | cut -d= -f2 | cut -d_ -f1)
-if [ "$LANGUAGE" == "de" ]; then
-    source "$PROJECT_ROOT/hypr/lang/lang_de.sh"
-else
-    source "$PROJECT_ROOT/hypr/lang/lang_en.sh"
-fi
+    source "$PROJECT_ROOT/install/install_list"
 
-source "$PROJECT_ROOT/install/install_list"
+    show_message "$LANG_WELCOME_MESSAGE"
 
-show_message "$LANG_WELCOME_MESSAGE"
+    check_prerequisites
 
-check_prerequisites
+    get_user_choices
 
-INSTALL_LIST_REPOS_TOINSTALL_COUNT=$(echo "$INSTALL_LIST_REPOS_TOINSTALL" | wc -l)
-#INSTALL_LIST_REPOS_TOINSTALL_COUNT=$((INSTALL_LIST_REPOS_TOINSTALL_COUNT + 10))
+    # Letzte Bestätigung vor der Installation
+    if ! gum confirm "$LANG_INSTALLERLASTCONFIRM_MESSAGE"; then
+        show_message "$LANG_ABORT_MESSAGE"
+        exit 0
+    fi
 
-INSTALL_LIST_PACKETS_TOINSTALL_COUNT=$(echo "$INSTALL_LIST_PACKETS_TOINSTALL" | wc -l)
-#INSTALL_LIST_PACKETS_TOINSTALL_COUNT=$((INSTALL_LIST_PACKETS_TOINSTALL_COUNT + 10))
+    log_message "$LANG_START_INSTALLATION"
 
-get_user_choices
+    if [ $ISDEBUGMODE -eq 1 ]; then
+        update_system || true
+        add_repositories || true
+        install_main_packages || true
+        install_optional_packages || true
+        configure_fish_shell || true
+        configure_monitor_resolution || true
+        show_message "$LANG_INSTALLATIONDONE_MESSAGE"
+        if gum confirm "$LANG_BACKUP_MESSAGE"; then
+            create_backup
+            show_message "$LANG_BACKUPDONE_MESSAGE"
+        else
+            show_message "$LANG_BACKUPABORT_MESSAGE"
+        fi
+    #else
+    #    install_optional_packages || true
+    fi
+}
 
-# Letzte Bestätigung vor der Installation
-if ! gum confirm "$LANG_INSTALLERLASTCONFIRM_MESSAGE"; then
-    show_message "$LANG_ABORT_MESSAGE"
-    exit 0
-fi
-
-log_message "$LANG_START_INSTALLATION"
-
-update_system || true
-add_repositories || true
-install_main_packages || true
-install_optional_packages || true
-configure_fish_shell || true
-
-show_message "$LANG_INSTALLATIONDONE_MESSAGE"
-
-if gum confirm "$LANG_BACKUP_MESSAGE"; then
-    create_backup
-    show_message "$LANG_BACKUPDONE_MESSAGE"
-else
-    show_message "$LANG_BACKUPABORT_MESSAGE"
-fi
+main

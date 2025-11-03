@@ -2,7 +2,11 @@
 
 # shellcheck disable=SC2034
 LANG_WELCOME_MESSAGE="Willkommen zum MyHyprlandConfigs Installer
-Dieses Script installiert MyHyprlandConfigs auf Ihrem Fedora System."
+Dieses Script installiert MyHyprlandConfigs auf Ihrem Fedora System.
+Bitte beachtet, dass bei Auswahldialogen eine Auswahl mit X oder Space
+getroffen werden muss!"
+
+LANG_START_INSTALLATION="Starte Installation..."
 
 LANG_ERROR_PREFIX="FEHLER: "
 LANG_ERROR_MESSAGE="Dieses Script läuft nur auf Fedora Linux."
@@ -24,7 +28,8 @@ LANG_BACKUPABORT_MESSAGE="Sicherung wurde nicht durchgeführt."
 
 LANG_ECHO_MESSAGE_UPDATE="DNF Update..."
 LANG_ECHO_MESSAGE_ADDREPO="Add Repositories..."
-LANG_ECHO_MESSAGE_INSTALLPACKAGES="Installiere optionales Paket..."
+LANG_ECHO_MESSAGE_INSTALLPACKAGES="Installiere Pakete..."
+LANG_ECHO_MESSAGE_OPTIONALPACKAGES="Installiere optionale Pakete..."
 
 LANG_ECHO_MESSAGE_FOLDERBACKUP="Ordner gesichert->"
 LANG_ECHO_MESSAGE_FOLDERNOTFOUND="Ordner nicht gefunden, übersprungen->"
@@ -42,3 +47,7 @@ LANG_FISH_ERROR_ERROR_ADDTO_ETCSHELLS="Konnte Fish Shell nicht zu /etc/shells hi
 
 LANG_FEDORA_UPDATE_MESSAGE="Fedora - Systemupdate"
 LANG_FEDORA_UPDATE_MESSAGE1="Alle verfügbaren Updates installieren?"
+
+LANG_MONITOR_RESOLUTION="Monitorauflösung konfigurieren?"
+LANG_MONITOR_RESOLUTIONS="Wählen Sie die gewünschte Monitorauflösung:"
+LANG_MONITOR_RESULTION_MESSAGE="Konfiguriere Monitorauflösung auf: "
