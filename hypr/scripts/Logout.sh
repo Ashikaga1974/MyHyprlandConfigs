@@ -20,7 +20,7 @@ MONITOR_HEIGHT=$(hyprctl -j monitors | jq '.[] | select(.focused==true) | .heigh
 MONITOR_SCALE=$(hyprctl -j monitors | jq '.[] | select (.focused == true) | .scale' | sed 's/\.//')
 
 # Anzahl der Spalten für wlogout (menübasierter Bildschirm)
-COLUMNS=6
+COLUMNS=5
 
 # Berechne Margin und Hover-Dimensionen skaliert auf Monitorhöhe und -skalierung
 margin=$((MONITOR_HEIGHT * 28 / MONITOR_SCALE))
