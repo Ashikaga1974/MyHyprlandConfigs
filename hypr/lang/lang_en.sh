@@ -39,6 +39,8 @@ LANG_ECHO_CANTCREATEFOLDER="Could not create directory $DEST."
 LANG_PACKAGE_INSTALLED="Package %s is already installed"
 LANG_INSTALLING_PACKAGE="Installing %s..."
 LANG_ERROR_PACKAGE="Could not install package %s"
+LANG_ERROR_UPDATE="System update failed"
+LANG_ERROR_AUTOREMOVE="Autoremove failed"
 
 LANG_FISH_SHELL_MESSAGE="Do you want to set Fish Shell as the default shell for your user?"
 LANG_FISH_ERROR_SHELL="Could not set Fish Shell as default shell."

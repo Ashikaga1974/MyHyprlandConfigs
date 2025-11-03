@@ -40,6 +40,8 @@ LANG_ECHO_CANTCREATEFOLDER="Konnte Verzeichnis $DEST nicht erstellen."
 LANG_PACKAGE_INSTALLED="Paket %s ist bereits installiert"
 LANG_INSTALLING_PACKAGE="Installiere %s..."
 LANG_ERROR_PACKAGE="Konnte Paket %s nicht installieren"
+LANG_ERROR_UPDATE="System-Update fehlgeschlagen"
+LANG_ERROR_AUTOREMOVE="Autoremove fehlgeschlagen"
 
 LANG_FISH_SHELL_MESSAGE="Möchten Sie die Fish Shell als Standard-Shell für Ihren Benutzer einrichten?"
 LANG_FISH_ERROR_SHELL="Konnte Fish Shell nicht als Standard-Shell einrichten."
