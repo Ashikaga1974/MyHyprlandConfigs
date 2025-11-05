@@ -178,10 +178,12 @@ install_optional_packages() {
 
 # Erstellt ein Backup der Konfigurationsdateien
 create_backup() {
-    local SRC DEST FOLDERS
+    local SRC DEST FOLDER
     mkdir -p "$TARGET_DIR" || handle_error "$LANG_ECHO_CANTREATEBACKUP"
-    FOLDERS=("fastfetch" "hypr" "kitty" "nwg-dock-hyprland" "rofi" "waybar" "wlogout" "fish" "swaync")
-    for FOLDER in "${FOLDERS[@]}"; do
+
+    # Durch die Zeilen der Variable iterieren
+    while IFS= read -r FOLDER; do
+        echo "Verarbeite Ordner: $FOLDER"
         SRC="$HOME/.config/$FOLDER"
         DEST="$TARGET_DIR/$FOLDER"
         if [[ -d "$SRC" ]]; then
@@ -191,7 +193,7 @@ create_backup() {
         else
             log_message "$LANG_ECHO_MESSAGE_FOLDERNOTFOUND$FOLDER"
         fi
-    done
+    done <<< "$copy_folder_list"
 }
 
 # Konfiguriert die Fish Shell
@@ -238,6 +240,7 @@ main() {
     set_language "$LANGUAGE"
 
     source "$PROJECT_ROOT/install/install_list"
+    source "$PROJECT_ROOT/install/install_copy_folder_list"
 
     show_message "$LANG_WELCOME_MESSAGE"
 
@@ -268,7 +271,7 @@ main() {
             show_message "$LANG_BACKUPABORT_MESSAGE"
         fi
     else
-        install_optional_packages || true
+        # install_optional_packages || true
         if confirm_action "$LANG_BACKUP_MESSAGE"; then
             create_backup
             show_message "$LANG_BACKUPDONE_MESSAGE"
