@@ -7,6 +7,18 @@ Fedora 42
 
 Fedora 43![](assets/20251029_150721_2025-10-29_15-06.png)
 
+Notifications
+
+![](assets/20251105_201746_image.png)
+
+Rofi
+
+![](assets/20251105_202355_image.png)
+
+Waybar
+
+![](assets/20251105_202504_image.png)
+
 ## WHY?
 
 I created my own dotfiles for Hyprland 🧩 because other solutions often
