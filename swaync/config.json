@@ -53,7 +53,6 @@
   "widgets": [
     "inhibitors",
     "title",
-    "dnd",
     "notifications"
   ],
   "widget-config": {
@@ -68,10 +67,10 @@
     "title": {
       "text": "Benachrichtigungen (Notifications)",
       "clear-all-button": true,
-      "button-text": "Alle löschen (Clear All)"
+      "button-text": ""
     },
     "dnd": {
-      "text": "Bitte nicht stören (Do not disturb)"
+      "text": "DND"
     },
     "label": {
       "max-lines": 5,
