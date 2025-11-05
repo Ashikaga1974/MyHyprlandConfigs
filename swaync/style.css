@@ -1,0 +1,50 @@
+* {
+    font-family: "Fira Sans Semibold", "Font Awesome 7 Free", "Font Awesome 7 Brands", "Font Awesome 6 Free", "Font Awesome 6 Brands", FontAwesome, "Material Icons", Roboto, Helvetica, Arial, sans-serif;
+    color: #cce7ff;
+}
+
+.container, .control-center {
+    background-color: rgba(20, 60, 130, 0.8);
+    border-radius: 12px;
+    padding: 15px;
+    backdrop-filter: blur(8px);
+    border: 4px solid #ffffff;
+}
+
+/* Benachrichtigungsrahmen */
+.notification {
+    background-color: rgba(20, 60, 130, 0.8);
+    border: 2px solid #cee4f7;
+    padding: 10px;
+    margin-bottom: 6px;
+    border-radius: 6px;
+    border: 4px solid #ffffff;
+}
+
+/* Titel der Benachrichtigung */
+.notification .title {
+    font-weight: bold;
+    font-size: 1.1em;
+    color: #a9d1ff;
+}
+
+/* Nachrichtentext */
+.notification .message {
+    font-size: 0.95em;
+    color: #d9e9ff;
+}
+
+/* Zeitstempel klein und dezent */
+.notification .time {
+    font-size: 0.75em;
+    color: #7aa9d9;
+    text-align: right;
+    margin-top: 4px;
+}
+
+.notification-row {
+
+}
+
+.notification-background {
+}

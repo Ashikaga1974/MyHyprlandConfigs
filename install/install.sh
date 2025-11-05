@@ -180,7 +180,7 @@ install_optional_packages() {
 create_backup() {
     local SRC DEST FOLDERS
     mkdir -p "$TARGET_DIR" || handle_error "$LANG_ECHO_CANTREATEBACKUP"
-    FOLDERS=("fastfetch" "hypr" "kitty" "nwg-dock-hyprland" "rofi" "waybar" "wlogout" "fish")
+    FOLDERS=("fastfetch" "hypr" "kitty" "nwg-dock-hyprland" "rofi" "waybar" "wlogout" "fish" "swaync")
     for FOLDER in "${FOLDERS[@]}"; do
         SRC="$HOME/.config/$FOLDER"
         DEST="$TARGET_DIR/$FOLDER"
