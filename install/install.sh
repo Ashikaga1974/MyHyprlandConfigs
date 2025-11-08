@@ -29,14 +29,14 @@ set_language() {
 
 # Prüft, ob das Skript auf Fedora läuft
 check_fedora() {
-    [[ -f /etc/fedora-release ]] || handle_error "$LANG_ERROR_MESSAGE"
+    [[ -f /etc/fedora-release ]] || echo "$LANG_ERROR_MESSAGE"
 }
 
 # Prüft Voraussetzungen
 check_prerequisites() {
     check_fedora
     command -v gum >/dev/null || {
-        log_message "$LANG_INSTALLING_GUM"
+        echo "$LANG_MESSAGE_INSTALL_GUM"
         sudo dnf install -y gum || handle_error "$LANG_ERROR_GUM"
     }
 }
@@ -242,9 +242,11 @@ main() {
     source "$PROJECT_ROOT/install/install_list"
     source "$PROJECT_ROOT/install/install_copy_folder_list"
 
-    show_message "$LANG_WELCOME_MESSAGE"
-
     check_prerequisites
+
+    clear
+
+    show_message "$LANG_WELCOME_MESSAGE"
     get_user_choices
 
     # Letzte Bestätigung vor der Installation

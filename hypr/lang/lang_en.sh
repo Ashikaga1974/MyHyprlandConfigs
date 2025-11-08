@@ -52,3 +52,5 @@ LANG_FEDORA_UPDATE_MESSAGE1="Install all available updates?"
 LANG_MONITOR_RESOLUTION="Configure monitor resolution?"
 LANG_MONITOR_RESOLUTIONS="Please select the desired monitor resolution:"
 LANG_MONITOR_RESULTION_MESSAGE="Configuring monitor resolution to: "
+
+LANG_MESSAGE_INSTALL_GUM="Gum is required to proceed."
