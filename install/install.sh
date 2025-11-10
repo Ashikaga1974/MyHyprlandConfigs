@@ -117,7 +117,7 @@ add_repositories() {
     sudo dnf copr enable --assumeyes erikreider/SwayNotificationCenter -q >/dev/null 2>&1
     sudo dnf copr enable --assumeyes tofik/nwg-shell -q >/dev/null 2>&1
     sudo dnf copr enable --assumeyes peterwu/rendezvous -q >/dev/null 2>&1
-    sudo dnf config-manager --add-repo https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo >/dev/null 2>&1
+    #sudo dnf config-manager --add-repo https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo >/dev/null 2>&1
 }
 
 # Hilfsfunktion für Paketinstallationsmeldungen
